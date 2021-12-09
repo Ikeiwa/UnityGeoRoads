@@ -6,6 +6,7 @@ using GeoJSON;
 public class GeoJSONLoader : MonoBehaviour {
 
 	public TextAsset encodedGeoJSON;
+    public RoadDisplay roadPrefab;
 
 	public GeoJSON.FeatureCollection collection;
     public float scaleFactor = 100f;
@@ -19,6 +20,25 @@ public class GeoJSONLoader : MonoBehaviour {
         {
             var pos = SetupPositions(collection, scaleFactor, out uint count);
             //Debug.LogError(count);
+            StartCoroutine(SpawnRoads(pos));
+
+        }
+    }
+
+    private IEnumerator SpawnRoads(List<List<Vector3>> pos)
+    {
+        foreach (List<Vector3> points in pos)
+        {
+            RoadDisplay road = Instantiate(roadPrefab,transform);
+            road.points = new RoadDisplay.RoadPoint[points.Count];
+
+            for (int i = 0; i < road.points.Length; i++)
+            {
+                road.points[i] = new RoadDisplay.RoadPoint(new Vector2(points[i].x, points[i].z), points[i].y,1/scaleFactor);
+            }
+
+            road.UpdateMesh();
+            yield return null;
         }
     }
 
