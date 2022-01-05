@@ -13,6 +13,7 @@ Cependant, Unity gère les nombres flottant en 32bits et les données passées s
 Il y aura donc une perte de données obligatoire ([lien explication]()). 
 Tout comme pour la lecture des données, une librairie l'avait déjà fait dans les issues du parseur de GeoGML ([lien convertisseur GPS to UCS]()).
 
+
 private void FindMetersPerLat(float lat) // Compute lengths of degrees
 {
     float m1 = 111132.92f;    // latitude calculation term 1
@@ -38,6 +39,7 @@ private Vector3 ConvertGPStoUCS(Vector2 gps)
     float xPosition = metersPerLon * (gps.y - _LonOrigin);
     return new Vector3((float)xPosition, 0, (float)zPosition);
 }
+
 
 ## Création des routes
 
