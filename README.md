@@ -18,34 +18,34 @@ Tout comme pour la lecture des données, une librairie l'avait déjà fait dans 
 Avec des données extraites on génère les différentes routes dans unity, pour cela on génère un modèle 3D par route à l’aide d’une liste de points, chaque point contient un vecteur 2D et une hauteur afin de rendre plus simple les calculs.
 Le mesh de la route est fait de segments perpendiculaires à la route connectés par deux triangles, la première étape est de trouver leur direction et longueur, dans le cas des points de départ et de fin c’est simple on calcul la normale de la route et on prend sa largeur de base. Cependant la situation se complique dans les coins car le segment doit être plus long sinon la route sera comme pincée.
 
-<div style="margin:auto">
+<p align="center">
     <img src="Images/parralelle_droite.png">
     </img>
-</div>
+</p>
 <br>
 
 A gauche tous les segments ont la même longueur, à droite le segment du centre est rallongé pour éviter le pincement. Pour cela on utilise une méthode simple, on commence par calculer la tangente du coin:
 
-<center>
+<p align="center">
     <b>
         (Direction sortie normalisé + Direction entrée normalisé) le tout normalisé
     </b>
-</center>
+</p>
 <br>
 
 Ensuite on prend la normale de la tangente (miter), comme on travaille en 2D il suffit de faire 
 
-<center>
+<p align="center">
     <b>
         [-tangente.x , tangente.y]
     </b>
-</center>
+</p>
 <br>
 
 Et enfin pour sa longueur on divise la largeur de base de la route par le produit scalaire du miter et de la normale de la direction d’entrée.
 Pour rajouter un peu plus de qualité on a aussi arrondis le coin extérieur de la route, pour cela il suffit de prendre un cercle au centre du segment avec comme diamètre la largeur de la route et de générer plusieurs points sur l’arc du cercle présent entre la normale du segment d’entrée et de sortie.
 
-<center>
+<p align="center">
     <img src="Images/texture_flou.png">
     </img>
-</center>
+</p>
