@@ -22,7 +22,6 @@ Le mesh de la route est fait de segments perpendiculaires à la route connectés
     <img src="Images/parralelle_droite.png">
     </img>
 </p>
-<br>
 
 A gauche tous les segments ont la même longueur, à droite le segment du centre est rallongé pour éviter le pincement. Pour cela on utilise une méthode simple, on commence par calculer la tangente du coin:
 
@@ -31,7 +30,6 @@ A gauche tous les segments ont la même longueur, à droite le segment du centre
         (Direction sortie normalisé + Direction entrée normalisé) le tout normalisé
     </b>
 </p>
-<br>
 
 Ensuite on prend la normale de la tangente (miter), comme on travaille en 2D il suffit de faire 
 
@@ -40,7 +38,6 @@ Ensuite on prend la normale de la tangente (miter), comme on travaille en 2D il 
         [-tangente.x , tangente.y]
     </b>
 </p>
-<br>
 
 Et enfin pour sa longueur on divise la largeur de base de la route par le produit scalaire du miter et de la normale de la direction d’entrée.
 Pour rajouter un peu plus de qualité on a aussi arrondis le coin extérieur de la route, pour cela il suffit de prendre un cercle au centre du segment avec comme diamètre la largeur de la route et de générer plusieurs points sur l’arc du cercle présent entre la normale du segment d’entrée et de sortie.
